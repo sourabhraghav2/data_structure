@@ -17,6 +17,15 @@ public class LevelTraversal {
 	}
 
 	public static void main(String[] args) {
+
+		Node root = new Node(1);
+		root.left = new Node(2);
+		root.right = new Node(3);
+		root.left.left = new Node(4);
+		root.left.right = new Node(5);
+		root.left.right.right = new Node(3);
+		root.left.left.left = new Node(8);
+		root.left.left.right = new Node(9);
 		/*
 		 * 							1
 		 * 						/		\
@@ -27,15 +36,8 @@ public class LevelTraversal {
 		 *        8                  3  
 
 		 *         
-		 * */	
-		Node root = new Node(1);
-		root.left = new Node(2);
-		root.right = new Node(3);
-		root.left.left = new Node(4);
-		root.left.right = new Node(5);
-		root.left.right.right = new Node(3);
-		root.left.left.left = new Node(8);
-
+		 * */						
+		
 		LevelTraversal lt = new LevelTraversal(root);
 		lt.levelTraversaL();
 	}
@@ -48,18 +50,27 @@ public class LevelTraversal {
 
 	private void levelTraversaL(Node node) {
 
-		if (node != null) {
-			queue.add(node);
-			while (!queue.isEmpty()) {
-				Node current = queue.peek();
-				System.out.println(current.data);
-				queue.remove();
-				if (current.left != null)
-					queue.add(current.left);
-				if (current.right != null)
-					queue.add(current.right);
+		queue.add(node);
+		queue.add(null);
+		while (!queue.isEmpty()) {
 
+			Node current = queue.peek();
+			if (current != null) {
+				queue.remove();
+				System.out.println(current.data);
+				if(current.left!=null) queue.add(current.left);
+				if(current.right!=null) queue.add(current.right);
+
+			}else{
+				queue.remove();
+				System.out.println("*");
+				if(queue.peek()!=null){
+					queue.add(null);
+				}
+				
 			}
 		}
+
 	}
+
 }
