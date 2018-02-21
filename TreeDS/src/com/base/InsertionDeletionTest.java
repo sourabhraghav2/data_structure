@@ -16,7 +16,7 @@ public class InsertionDeletionTest {
 		id.insertData(10);
 		System.out.println("before");
 		id.inorderTraverse();
-		id.deleteRec(20);
+		id.deleteRec(30);
 		System.out.println("after");
 		id.inorderTraverse();
 	}
@@ -45,18 +45,28 @@ public class InsertionDeletionTest {
 	}
 
 	private Node delete(Node node, int data) {
-		if (node == null)
-			return null;
-		if (node.data < data) {
-			node.right = delete(node.right, data);
-		} else if (node.data > data) {
-			node.left = delete(node.left, data);
-		} else {
-			if (node.left == null) {
 
+		if (node != null) {
+			if (node.data > data) {
+				node.left = delete(node.left, data);
+			} else if (node.data < data) {
+				node.right = delete(node.right, data);
+			} else {
+				if (node.right == null) {
+					return node.left;
+				} else if (node.left == null) {
+					return node.right;
+				} else {
+					int ancestor = findAncestor(node.left);
+					
+					node.left=delete(node.left, ancestor);
+					node.data=ancestor;
+				}
 			}
+
 		}
-		return null;
+		return node;
+
 	}
 
 	int minValue(Node root) {
@@ -69,36 +79,10 @@ public class InsertionDeletionTest {
 	}
 
 	public void deleteRec(int data) {
-		root = deleteRec(root, data);
+		root = delete(root, data);
 	}
 
-	private Node deleteRec(Node node, int data) {
 
-		if (node != null) {
-			// not null check
-			if (node.data < data) {
-				node.right = deleteRec(node.right, data);
-			} else if (node.data > data) {
-				node.left = deleteRec(node.left, data);
-			} else {
-				// if equal
-
-				if (node.left == null) {
-					// if left is null then replace with right(single child)
-					return node.right;
-				} else if (node.right == null) {
-					// if right is null then replace with left (single child)
-					return node.left;
-				} else {
-					// double child
-					int replaceData = findAncestor(node.left);
-					node.left = deleteRec(node.left, replaceData);
-				}
-			}
-		}
-		return node;
-
-	}
 
 	private int findAncestor(Node node) {
 		while (node.right != null) {

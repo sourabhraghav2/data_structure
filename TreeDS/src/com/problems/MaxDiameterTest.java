@@ -35,8 +35,8 @@ public class MaxDiameterTest {
 		int result = 0;
 		if (node != null) {
 
-			int lheight = findHeight(node);
-			int rheight = findHeight(node);
+			int lheight = findHeight(node.left);
+			int rheight = findHeight(node.right);
 			int rootDia = lheight + rheight + 1;
 
 			int leftDia = findMaxDiameter(node.left);
