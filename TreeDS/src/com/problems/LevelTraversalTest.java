@@ -1,0 +1,77 @@
+package com.problems;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+import com.model.Node;
+
+public class LevelTraversalTest {
+
+	Node root;
+
+	Queue<Node> queue = new LinkedList<>();
+
+	public LevelTraversalTest(Node root) {
+		this.root = root;
+	}
+
+	public static void main(String[] args) {
+
+		Node root = new Node(1);
+		root.left = new Node(2);
+		root.right = new Node(3);
+		root.left.left = new Node(4);
+		root.left.right = new Node(5);
+		root.left.right.right = new Node(3);
+		root.left.left.left = new Node(8);
+		root.left.left.right = new Node(9);
+		/*
+		 * 							1
+		 * 						/		\
+		 * 					2				3
+		 * 				 /	   \
+		 * 			  4			  5
+		 *         /   \            \
+		 *        8     9             3  
+
+		 * 
+		 * 
+		 */
+
+		LevelTraversalTest lt = new LevelTraversalTest(root);
+		lt.levelTraversaL();
+	}
+
+	private void levelTraversaL() {
+
+		levelTraversaL(root);
+
+	}
+
+	private void levelTraversaL(Node node) {
+		if (node != null) {
+			queue.add(node);
+			queue.add(null);
+			while (!queue.isEmpty()) {
+				Node current = queue.peek();
+				
+				if (current != null) {
+					queue.remove();
+					System.out.println(current.data);
+					if((current.left)!=null)queue.add(current.left);
+					if(current.right!=null)queue.add(current.right);
+				} else {
+					System.out.println("*");
+					queue.remove();
+					if (queue.peek() != null) {
+						queue.add(null);
+					}
+				}
+
+			}
+		}
+
+	}
+
+}
