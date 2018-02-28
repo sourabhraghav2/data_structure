@@ -1,5 +1,7 @@
 package com.base;
 
+import com.model.Node;
+
 public class RecursionTraversal {
 	Node root;
 

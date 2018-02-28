@@ -1,4 +1,6 @@
-package com.base;
+package com.problems;
+
+import com.model.Node;
 
 public class MorrisTraversal {
 

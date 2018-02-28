@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-import com.base.Node;
+import com.model.Node;
 
 public class LevelTraversal {
 

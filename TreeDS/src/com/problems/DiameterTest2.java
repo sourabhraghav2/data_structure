@@ -2,11 +2,11 @@ package com.problems;
 
 import com.model.Node;
 
-public class MaxDiameterTest2 {
+public class DiameterTest2 {
 
 	Node root;
 
-	public MaxDiameterTest2(Node node) {
+	public DiameterTest2(Node node) {
 		root = node;
 	}
 
@@ -32,7 +32,7 @@ public class MaxDiameterTest2 {
 		 * 
 		 * 
 		 */
-		MaxDiameterTest2 md = new MaxDiameterTest2(root);
+		DiameterTest2 md = new DiameterTest2(root);
 		
 		md.findMaxDiameter();
 
