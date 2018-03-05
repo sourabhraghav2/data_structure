@@ -42,6 +42,7 @@ public class PostOrderTraversalUsingStack {
 					System.out.println(prev.data);
 				} else if (current.left == prev) {
 					if (current.right != null) {
+						prev=current;
 						stack.push(current.right);
 					} else {
 						prev = stack.pop();
@@ -49,6 +50,7 @@ public class PostOrderTraversalUsingStack {
 					}
 				} else {
 					if (current.left != null) {
+						prev=current;
 						stack.push(current.left);
 					} else {
 						prev = stack.pop();
