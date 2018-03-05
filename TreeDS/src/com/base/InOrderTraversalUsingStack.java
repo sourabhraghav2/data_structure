@@ -4,14 +4,14 @@ import java.util.Stack;
 
 import com.model.Node;
 
-public class PreOrderTraversalUsingStack {
+public class InOrderTraversalUsingStack {
 
 	Node root = null;
 	Stack<Node> stack = new Stack<Node>();
 
 	public static void main(String[] args) {
 
-		PreOrderTraversalUsingStack id = new PreOrderTraversalUsingStack();
+		InOrderTraversalUsingStack id = new InOrderTraversalUsingStack();
 		id.insertData(50);
 		id.insertData(80);
 		id.insertData(70);
@@ -22,34 +22,46 @@ public class PreOrderTraversalUsingStack {
 		id.insertData(10);
 		System.out.println("before");
 
-		id.preOrderTraversal();
+		id.inOrderTraversal();
+		/*						50
+		 *					/		 \
+		 *				30				80
+		 *			/		\		/		\
+		 *		20			40	  70		90
+		 *	  /
+		 *  10
+		 * */
 	}
 
-	private void preOrderTraversal() {
+	private void inOrderTraversal() {
 
-		preOrderTraversal(root);
+		inOrderTraversal(root);
 	}
 
 
-	private void preOrderTraversal(Node node) {
+	
 
-		if (node != null) {
-			stack.push(node);
-			while (!stack.isEmpty()) {
-				Node current = stack.peek();
-				System.out.println(current.data);
-				stack.pop();
-				if (current.right != null) {
-					stack.push(current.right);
-				}
-				if (current.left != null) {
-					stack.push(current.left);
-				}  
-
+	private void inOrderTraversal(Node root) {
+		if(root!=null){
+			while(root!=null){
+				stack.push(root);
+				root=root.left;
 			}
-
+			while(!stack.isEmpty()){
+				Node current=stack.pop();
+				System.out.println(current.data);
+				if(current.right!=null){
+					current=current.right;
+					while(current!=null){
+						stack.push(current);
+						current=current.left;
+					}
+					
+				}
+			}
 		}
 
+		
 	}
 
 	public void insertData(int data) {
