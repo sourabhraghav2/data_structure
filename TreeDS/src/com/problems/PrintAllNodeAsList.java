@@ -44,8 +44,7 @@ public class PrintAllNodeAsList {
 
 	private void findLCA() {
 		ArrayList <Node> list=new ArrayList<>(); 
-		findLCA(root,list) ;
-		
+		findLCA(root,list) ;		
 	}
 
 
