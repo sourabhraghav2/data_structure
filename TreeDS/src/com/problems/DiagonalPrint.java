@@ -1,12 +1,15 @@
 package com.problems;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import com.model.Node;
 
-public class PrintDistanceForCurrentNode{
+public class DiagonalPrint{
 
 	Node root;
 
-	public PrintDistanceForCurrentNode(Node node) {
+	public DiagonalPrint(Node node) {
 		root = node;
 	}
 
@@ -33,57 +36,46 @@ public class PrintDistanceForCurrentNode{
 		root.left.left.left = new Node(8);
 		root.left.left.right = new Node(9);
 		
-		PrintDistanceForCurrentNode md = new PrintDistanceForCurrentNode(root);
+		DiagonalPrint md = new DiagonalPrint(root);
 
-		md.printCurrentNodeDistance(7);
+		md.printDiagonal();
 
 	}
 
-	private void printCurrentNodeDistance(int findDigit) {
+	private void printDiagonal() {
 
-		OutPut result=printCurrentNodeDistance(root,findDigit);
-		if(result.status){
-			System.out.println(result.distance);
-		}else{
-			System.out.println("node not found");
-		}
+		printDiagonal(root);
+		
 		
 	}
 
-	private OutPut printCurrentNodeDistance(Node node,int findDigit) {
-		OutPut result=new OutPut();
+	private void printDiagonal(Node node) {
+		
 
+		Queue<Node> queue=new LinkedList<Node>();
 		if (node != null ) {
-			
-			if(node.data==findDigit){
-				result.distance=1;
-				result.status=true;
-			}else{
-				OutPut left=printCurrentNodeDistance(node.left,findDigit);
-				OutPut right=printCurrentNodeDistance(node.right,findDigit);
-				if(left.status){
-					result.distance=left.distance+1;
-					result.status=true;
-				}else if(right.status){
-					result.distance=right.distance+1;
-					result.status=true;
+			queue.add(node);
+			Node current=null;
+			while(!queue.isEmpty() ||current!=null){
+				
+				if(current!=null){
+					System.out.println(current.data);
+					if(current.left!=null){
+						queue.add(current.left);
+					} 
+					current=current.right; 
+					
+				}else{
+					current=queue.remove();
 				}
+				
 			}
 			
 		}
-		return result;
+		return ;
 	}
 	
-	private class OutPut{
-		boolean status;
-		int distance;
-		public OutPut(){
-			status=false;
-			distance=0;	
-		}
-		
-	}
-
+	
 }
 
 
